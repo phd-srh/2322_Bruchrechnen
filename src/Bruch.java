@@ -14,6 +14,20 @@ public class Bruch {
         return new Bruch(neuerZähler, neuerNenner).kürze();
     }
 
+    public Bruch sub(Bruch b) {
+        return this.add( b.negiere() );
+    }
+
+    public Bruch negiere() {
+        long neuerZähler = -this.zähler;
+        long neuerNenner = this.nenner;
+        if (neuerZähler < 0 && neuerNenner < 0) {
+            neuerZähler = -neuerZähler;
+            neuerNenner = -neuerNenner;
+        }
+        return new Bruch( neuerZähler, neuerNenner );
+    }
+
     public Bruch kürze() {
         long teiler = ggT(zähler, nenner);
         return new Bruch( zähler/teiler, nenner/teiler );
