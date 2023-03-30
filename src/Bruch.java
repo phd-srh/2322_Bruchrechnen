@@ -18,6 +18,20 @@ public class Bruch {
         return this.add( b.negiere() );
     }
 
+    public Bruch mult(Bruch b) {
+        long neuerZähler = this.zähler * b.zähler;
+        long neuerNenner = this.nenner * b.nenner;
+        return new Bruch(neuerZähler, neuerNenner).kürze();
+    }
+
+    public Bruch div(Bruch b) {
+        return this.mult( b.kehrWert() );
+    }
+
+    public Bruch kehrWert() {
+        return new Bruch( nenner, zähler );
+    }
+
     public Bruch negiere() {
         long neuerZähler = -this.zähler;
         long neuerNenner = this.nenner;
@@ -31,6 +45,15 @@ public class Bruch {
     public Bruch kürze() {
         long teiler = ggT(zähler, nenner);
         return new Bruch( zähler/teiler, nenner/teiler );
+    }
+
+    public boolean isEqual(Bruch b) {
+        // wann sind zwei Brüche gleich?
+//        Bruch a1 = this.kürze();
+//        Bruch b1 = b.kürze();
+//        return (a1.zähler == b1.zähler && a1.nenner == b1.nenner);
+        Bruch ergebnis = this.div(b);
+        return (ergebnis.zähler == ergebnis.nenner);
     }
 
     private long ggT(long a, long b) {
